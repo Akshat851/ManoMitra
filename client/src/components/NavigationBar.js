@@ -6,7 +6,7 @@ import {
   Link as MuiLink,
   IconButton,
 } from "@mui/material";
-import { NavLink, Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 
 export const NavigationBar = () => {
@@ -21,9 +21,8 @@ export const NavigationBar = () => {
     >
       <Toolbar
         sx={{
-          height: 50,
-          padding: "0 25px",
-          fontSize: "x-large",
+          p: "0 20px",
+          fontSize: "large",
           fontFamily: "Calibri",
         }}
       >
@@ -37,22 +36,58 @@ export const NavigationBar = () => {
             to="/"
             color="inherit"
             underline="none"
-            sx={{ fontSize: 20, ml: 1 }}
+            sx={{ fontSize: 20, mx: 1 }}
           >
-            Dashboard
+            Home
           </MuiLink>
           <MuiLink
             component={RouterLink}
             to="/topics"
             color="inherit"
             underline="none"
-            sx={{ fontSize: 20, ml: 2 }}
+            sx={{ fontSize: 20, mx: 1 }}
           >
-            Topics
+            Articles
+          </MuiLink>
+          <MuiLink
+            component={RouterLink}
+            to="/topics"
+            color="inherit"
+            underline="none"
+            sx={{ fontSize: 20, mx: 1 }}
+          >
+            Events
+          </MuiLink>
+          <MuiLink
+            component={RouterLink}
+            to="/topics"
+            color="inherit"
+            underline="none"
+            sx={{ fontSize: 20, mx: 1 }}
+          >
+            Contacts
+          </MuiLink>
+          <MuiLink
+            component={RouterLink}
+            to="/topics"
+            color="inherit"
+            underline="none"
+            sx={{ fontSize: 20, mx: 1 }}
+          >
+            Chat
+          </MuiLink>
+          <MuiLink
+            component={RouterLink}
+            to="/topics"
+            color="inherit"
+            underline="none"
+            sx={{ fontSize: 20, mx: 1 }}
+          >
+            Counsellors
           </MuiLink>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          Add user functionality
+          Add user profile functionality
         </Box>
       </Toolbar>
     </AppBar>
