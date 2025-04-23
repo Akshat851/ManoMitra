@@ -30,7 +30,6 @@ export const NavigationBar = () => {
           <IconButton>
             <HomeIcon color="primary" />
           </IconButton>
-
           <MuiLink
             component={RouterLink}
             to="/"
