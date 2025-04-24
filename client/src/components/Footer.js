@@ -3,17 +3,14 @@ import { Box, Typography } from "@mui/material";
 
 export const Footer = () => {
   return (
-    <Box
+    <Typography
       sx={{
         p: "15px",
-        color: "#686868",
-        fontFamily: `"Calibri", "Gill Sans", "Gill Sans MT", "Trebuchet MS", sans-serif`,
+        color: "text.secondary",
         textAlign: "center",
       }}
     >
-      <Typography>
-        {`Copyright \u00A9 ${new Date().getFullYear()} ManoMitra All rights reserved`}
-      </Typography>
-    </Box>
+      {`Copyright \u00A9 ${new Date().getFullYear()} ManoMitra All rights reserved`}
+    </Typography>
   );
 };

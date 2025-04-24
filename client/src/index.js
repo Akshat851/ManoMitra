@@ -8,13 +8,20 @@ const theme = createTheme({
   palette: {
     primary: {
       main: "#0d6797",
-      contrastText: "#686868",
-      text: "#ffffff",
+      light: "#ffffff",
+    },
+    custom: {
+      navbar: "#333333",
       bglayer: "#e8e8e8",
+      darkHover: "linear-gradient(to right, #444444, #555555)",
+    },
+    text: {
+      primary: "#ffffff",
+      secondary: "#686868",
     },
   },
   typography: {
-    // fontFamily: "Montserrat",
+    fontFamily: "Montserrat",
   },
 });
 

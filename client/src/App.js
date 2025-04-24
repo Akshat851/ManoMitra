@@ -9,8 +9,8 @@ function App() {
     <BrowserRouter>
       <Box
         sx={{
-          height: "100vh",
-          bgcolor: "#e8e8e8",
+          minHeight: "100vh",
+          bgcolor: "custom.bglayer",
           display: "flex",
           flexDirection: "column",
         }}
@@ -18,6 +18,8 @@ function App() {
         <NavigationBar />
         <Box
           sx={{
+            display: "flex",
+            flexDirection: "column",
             flex: 1,
           }}
         >

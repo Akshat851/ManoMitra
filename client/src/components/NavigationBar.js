@@ -5,89 +5,83 @@ import {
   Box,
   Link as MuiLink,
   IconButton,
+  Typography,
+  Button,
+  useTheme,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 
 export const NavigationBar = () => {
+  const theme = useTheme();
+  const navItems = [
+    {
+      text: "Home",
+      to: "/",
+    },
+    {
+      text: "Articles",
+      to: "/",
+    },
+    {
+      text: "Events",
+      to: "/",
+    },
+    {
+      text: "Contacts",
+      to: "/",
+    },
+    {
+      text: "Chat",
+      to: "/",
+    },
+    {
+      text: "Counsellors",
+      to: "/",
+    },
+  ];
   return (
     <AppBar
       position="static"
       sx={{
-        backgroundColor: "#333333",
-        boxShadow: "0px 0px 5px #1a1a1a",
-        zIndex: 1,
+        backgroundColor: "custom.navbar",
       }}
     >
       <Toolbar
         sx={{
-          p: "0 20px",
           fontSize: "large",
-          fontFamily: "Calibri",
         }}
       >
-        <Box sx={{ display: "flex", flex: 1, alignItems: "center" }}>
-          <IconButton>
-            <HomeIcon color="primary" />
-          </IconButton>
-          <MuiLink
-            component={RouterLink}
-            to="/"
-            color="inherit"
-            underline="none"
-            sx={{ fontSize: 20, mx: 1 }}
-          >
-            Home
-          </MuiLink>
-          <MuiLink
-            component={RouterLink}
-            to="/topics"
-            color="inherit"
-            underline="none"
-            sx={{ fontSize: 20, mx: 1 }}
-          >
-            Articles
-          </MuiLink>
-          <MuiLink
-            component={RouterLink}
-            to="/topics"
-            color="inherit"
-            underline="none"
-            sx={{ fontSize: 20, mx: 1 }}
-          >
-            Events
-          </MuiLink>
-          <MuiLink
-            component={RouterLink}
-            to="/topics"
-            color="inherit"
-            underline="none"
-            sx={{ fontSize: 20, mx: 1 }}
-          >
-            Contacts
-          </MuiLink>
-          <MuiLink
-            component={RouterLink}
-            to="/topics"
-            color="inherit"
-            underline="none"
-            sx={{ fontSize: 20, mx: 1 }}
-          >
-            Chat
-          </MuiLink>
-          <MuiLink
-            component={RouterLink}
-            to="/topics"
-            color="inherit"
-            underline="none"
-            sx={{ fontSize: 20, mx: 1 }}
-          >
-            Counsellors
-          </MuiLink>
+        <Box
+          sx={{
+            display: "flex",
+            flex: 1,
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          {navItems.map((item) => (
+            <Box
+              sx={{
+                p: "10px",
+                display: "flex",
+                flexDirection: "row",
+                gap: 1,
+                borderRadius: "50px",
+                cursor: "pointer",
+                "&:hover": {
+                  background: theme.palette.custom.darkHover,
+                },
+              }}
+            >
+              {item.text === "Home" && <HomeIcon sx={{ display: "flex" }} />}
+              <Typography>{item.text}</Typography>
+            </Box>
+          ))}
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Typography sx={{ alignItems: "center" }}>
           Add user profile functionality
-        </Box>
+        </Typography>
       </Toolbar>
     </AppBar>
   );
