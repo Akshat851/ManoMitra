@@ -3,6 +3,7 @@ import EastIcon from "@mui/icons-material/East";
 import React from "react";
 import phone from "../images/phone.jpg";
 import online_support from "../images/online_support.jpg";
+import { Link } from "react-router-dom";
 
 // need to fetch it from backend
 const keywordData = [
@@ -164,6 +165,7 @@ export const HomePage = () => {
                 p: 1,
                 borderRadius: "4px",
                 color: "primary.main",
+                textDecoration: "none",
                 cursor: "pointer",
                 border: `2px solid ${theme.palette.primary.main}`,
                 "&:hover": {
@@ -172,6 +174,8 @@ export const HomePage = () => {
                   color: "primary.light",
                 },
               }}
+              component={Link}
+              to="/crisis"
             >
               Get help now
               <EastIcon />

@@ -1,0 +1,117 @@
+import React from "react";
+import { Box, Typography, Button, useTheme } from "@mui/material";
+import online_therapist from "../images/online_therapist.png";
+import EastIcon from "@mui/icons-material/East";
+
+export const CrisisPage = () => {
+  const theme = useTheme();
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        flex: 1,
+      }}
+    >
+      <Box
+        sx={{
+          height: "360px",
+          width: 2 / 3,
+          display: "flex",
+          flexDirection: "row",
+          boxShadow: 3,
+          flexWrap: "wrap",
+        }}
+      >
+        <Box
+          sx={{
+            color: "primary.main",
+            padding: "20px",
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            backgroundImage: `url(${online_therapist})`,
+            backgroundSize: "100% 100%",
+          }}
+        >
+          <Typography
+            variant="h5"
+            sx={{
+              flex: 1,
+            }}
+          >
+            I would like to speak with a Counsellor on the phone
+          </Typography>
+          <Typography
+            variant="h5"
+            fontWeight="bold"
+            sx={{
+              flex: 1,
+            }}
+          >
+            Our professional Counsellors are available 24/7
+          </Typography>
+          <Typography variant="h5">9876543210</Typography>
+        </Box>
+        <Box
+          sx={{
+            backgroundColor: "primary.main",
+            color: "primary.light",
+            padding: "20px",
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Typography variant="h5" sx={{ flex: 1, textAlign: "end" }}>
+            I would like to message a therapist online
+          </Typography>
+          <Typography
+            variant="h5"
+            fontWeight="bold"
+            sx={{ flex: 1, textAlign: "end" }}
+          >
+            Online messaging services open Monday to Friday 8 am to 5 pm
+          </Typography>
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <Box
+              sx={{
+                bgcolor: "primary.light",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 1,
+                p: 1,
+                borderRadius: "4px",
+                color: "primary.main",
+                cursor: "pointer",
+                border: `2px solid ${theme.palette.primary.main}`,
+                "&:hover": {
+                  border: `2px solid ${theme.palette.primary.light}`,
+                  bgcolor: "primary.main",
+                  color: "primary.light",
+                },
+              }}
+            >
+              Talk to someone
+              <EastIcon />
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+      <Typography
+        sx={{
+          fontSize: "1.2rem",
+          color: "primary.main",
+          marginTop: "20px",
+          fontWeight: "bold",
+        }}
+      >
+        If you are experiencing a medical emergency, please call 108
+      </Typography>
+    </Box>
+  );
+};

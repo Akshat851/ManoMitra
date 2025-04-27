@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
+import { CrisisPage } from "./pages/CrisisPage";
 import { NavigationBar } from "./components/NavigationBar";
 import { Footer } from "./components/Footer";
 import { Box } from "@mui/material";
@@ -25,6 +26,7 @@ function App() {
         >
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/crisis" element={<CrisisPage />} />
           </Routes>
         </Box>
         <Footer />
