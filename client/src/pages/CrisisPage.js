@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Button, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import online_therapist from "../images/online_therapist.png";
 import EastIcon from "@mui/icons-material/East";
 
@@ -12,12 +12,12 @@ export const CrisisPage = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        pt: "20px",
         flex: 1,
       }}
     >
       <Box
         sx={{
-          height: "360px",
           width: 2 / 3,
           display: "flex",
           flexDirection: "row",
@@ -32,31 +32,22 @@ export const CrisisPage = () => {
             flex: 1,
             display: "flex",
             flexDirection: "column",
+            gap: 5,
             backgroundImage: `url(${online_therapist})`,
             backgroundSize: "100% 100%",
           }}
         >
-          <Typography
-            variant="h5"
-            sx={{
-              flex: 1,
-            }}
-          >
+          <Typography variant="h5">
             I would like to speak with a Counsellor on the phone
           </Typography>
-          <Typography
-            variant="h5"
-            fontWeight="bold"
-            sx={{
-              flex: 1,
-            }}
-          >
+          <Typography variant="h5" fontWeight="bold">
             Our professional Counsellors are available 24/7
           </Typography>
           <Typography variant="h5">9876543210</Typography>
         </Box>
         <Box
           sx={{
+            gap: 5,
             backgroundColor: "primary.main",
             color: "primary.light",
             padding: "20px",
@@ -106,8 +97,8 @@ export const CrisisPage = () => {
         sx={{
           fontSize: "1.2rem",
           color: "primary.main",
-          marginTop: "20px",
           fontWeight: "bold",
+          p: "20px",
         }}
       >
         If you are experiencing a medical emergency, please call 108

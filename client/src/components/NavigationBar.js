@@ -1,15 +1,6 @@
 import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  Box,
-  Link as MuiLink,
-  IconButton,
-  Typography,
-  Button,
-  useTheme,
-} from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { AppBar, Toolbar, Box, Typography, useTheme } from "@mui/material";
+import { Link } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 
 export const NavigationBar = () => {
@@ -21,15 +12,23 @@ export const NavigationBar = () => {
     },
     {
       text: "Articles",
-      to: "/",
+      to: "/articles",
+    },
+    {
+      text: "News",
+      to: "/news",
+    },
+    {
+      text: "Forums",
+      to: "/forums",
     },
     {
       text: "Events",
       to: "/",
     },
     {
-      text: "Contacts",
-      to: "/",
+      text: "Contact Us",
+      to: "/contact",
     },
     {
       text: "Chat",
@@ -62,6 +61,7 @@ export const NavigationBar = () => {
         >
           {navItems.map((item) => (
             <Box
+              key={item.text}
               sx={{
                 p: "10px",
                 display: "flex",
@@ -69,10 +69,14 @@ export const NavigationBar = () => {
                 gap: 1,
                 borderRadius: "50px",
                 cursor: "pointer",
+                textDecoration: "none",
+                color: "inherit",
                 "&:hover": {
                   background: theme.palette.custom.darkHover,
                 },
               }}
+              component={Link}
+              to={item.to}
             >
               {item.text === "Home" && <HomeIcon sx={{ display: "flex" }} />}
               <Typography>{item.text}</Typography>
