@@ -38,7 +38,7 @@ export const ContactUsPage = () => {
       description: "Message from ManoMitra -> " + formData.get("description"),
     };
     emailjs
-      .send("service_zjrq4h8", "template_rmlm0sy", obj, "zwD-m8x18H1xY4uzR")
+      .send("service_zjrq4h8", "template_rmlm0sy", obj, "xxcZVUhmiI8DoEz8L")
       .then(
         (result) => {
           setFormData({
@@ -76,6 +76,7 @@ export const ContactUsPage = () => {
       <Box
         maxWidth="md"
         sx={{
+          m: "20px",
           bgcolor: "primary.light",
           p: "20px",
           borderRadius: "8px",
