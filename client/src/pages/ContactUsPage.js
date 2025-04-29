@@ -9,12 +9,10 @@ import {
   Snackbar,
   Alert,
   CircularProgress,
-  useTheme,
 } from "@mui/material";
 import emailjs from "@emailjs/browser";
 
 export const ContactUsPage = () => {
-  const theme = useTheme();
   const isSmallScreen = useMediaQuery("(max-width:600px)");
   const alignValue = isSmallScreen ? "center" : "inherit";
 
@@ -181,21 +179,14 @@ export const ContactUsPage = () => {
                 </Grid>
               </Grid>
               <Button
+                color="primary"
+                variant="contained"
                 type="submit"
                 disabled={stateDisabled}
                 fullWidth
                 sx={{
-                  bgcolor: "primary.main",
-                  alignItems: "center",
                   p: 1,
-                  my: 1,
-                  color: "primary.light",
-                  border: `2px solid ${theme.palette.primary.light}`,
-                  "&:hover": {
-                    border: `2px solid ${theme.palette.primary.main}`,
-                    bgcolor: "primary.light",
-                    color: "primary.main",
-                  },
+                  mt: 2,
                 }}
               >
                 {stateDisabled ? (

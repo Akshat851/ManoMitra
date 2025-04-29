@@ -3,6 +3,7 @@ import { HomePage } from "./pages/HomePage";
 import { CrisisPage } from "./pages/CrisisPage";
 import { NavigationBar } from "./components/NavigationBar";
 import { ContactUsPage } from "./pages/ContactUsPage";
+import { NewsPage } from "./pages/NewsPage";
 import { Footer } from "./components/Footer";
 import { Box } from "@mui/material";
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/crisis" element={<CrisisPage />} />
             <Route path="/contact" element={<ContactUsPage />} />
+            <Route path="/news" element={<NewsPage />} />
           </Routes>
         </Box>
         <Footer />
