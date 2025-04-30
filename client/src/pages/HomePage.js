@@ -1,9 +1,10 @@
-import { Avatar, Box, Typography, useTheme } from "@mui/material";
+import { Avatar, Box, Button, Typography, useTheme } from "@mui/material";
 import EastIcon from "@mui/icons-material/East";
 import React from "react";
 import phone from "../images/phone.jpg";
 import online_support from "../images/online_support.jpg";
 import { Link } from "react-router-dom";
+import { TrendingArticles } from "../components/TrendingArticles";
 
 // need to fetch it from backend
 const keywordData = [
@@ -88,21 +89,39 @@ export const HomePage = () => {
         flexWrap: "wrap",
       }}
     >
-      <Typography
+      <Box
         sx={{
           flex: 6,
           bgcolor: "primary.light",
           m: 2,
           p: 2,
-          color: "primary.main",
-          fontWeight: "medium",
-          fontSize: "1.2rem",
           borderRadius: "8px",
           boxShadow: 3,
+          display: "flex",
+          flexDirection: "column",
         }}
       >
-        Trending posts in your network
-      </Typography>
+        <Typography
+          sx={{
+            color: "primary.main",
+            fontWeight: "medium",
+            fontSize: "1.2rem",
+          }}
+        >
+          Trending Articles
+        </Typography>
+        <TrendingArticles />
+        <Button
+          sx={{ alignSelf: "end", mt: "10px" }}
+          color="primary"
+          variant="text"
+          component={Link}
+          to={"/articles"}
+        >
+          View All Articles
+          <EastIcon />
+        </Button>
+      </Box>
       <Box
         sx={{
           display: "flex",

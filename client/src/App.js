@@ -6,6 +6,8 @@ import { ContactUsPage } from "./pages/ContactUsPage";
 import { NewsPage } from "./pages/NewsPage";
 import { Footer } from "./components/Footer";
 import { Box } from "@mui/material";
+import { DetailedArticle } from "./pages/DetailedArticle";
+import { Articles } from "./pages/Articles";
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
             <Route path="/crisis" element={<CrisisPage />} />
             <Route path="/contact" element={<ContactUsPage />} />
             <Route path="/news" element={<NewsPage />} />
+            <Route path="/articles" element={<Articles />} />
+            <Route path="/articles/:articleId" element={<DetailedArticle />} />
           </Routes>
         </Box>
         <Footer />

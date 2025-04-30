@@ -5,6 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CardActions from "@mui/material/CardActions";
+import noImageAvailable from "../images/no_image.jpg";
 
 export const NewsCard = ({ item }) => {
   const { title, description, url, urlToImage } = item;
@@ -20,7 +21,7 @@ export const NewsCard = ({ item }) => {
       <CardMedia
         component="img"
         height="200px"
-        image={urlToImage}
+        image={urlToImage ? urlToImage : noImageAvailable}
         alt="image"
       />
       <CardContent sx={{ flex: 1 }}>
