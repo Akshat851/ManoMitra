@@ -13,7 +13,6 @@ export const Articles = () => {
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
-    console.log(searchTerm);
   };
 
   const getSearchResult = () => {

@@ -7,37 +7,57 @@ import { Link } from "react-router-dom";
 const articlePreviews = [
   {
     title: "AI and the Future of Work",
-    description:
+    author: "doctor name",
+    image: "some_image",
+    publishedAt: "2025-04-28T18:02:21Z",
+    content:
       "Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employmentExploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment",
+    description: "short desc",
     _id: "t1ech-ai",
   },
   {
     title: "AI and the Future of Work",
-    description:
+    author: "doctor name",
+    image: "some_image",
+    publishedAt: "2025-04-28T18:02:21Z",
+    content:
       "Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employmentExploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment",
+    description: "short desc",
     _id: "t2ech-ai",
   },
   {
     title: "AI and the Future of Work",
-    description:
+    author: "doctor name",
+    image: "some_image",
+    publishedAt: "2025-04-28T18:02:21Z",
+    content:
       "Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employmentExploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment",
+    description: "short desc",
     _id: "t3ech-ai",
   },
   {
     title: "AI and the Future of Work",
-    description:
+    author: "doctor name",
+    image: "some_image",
+    publishedAt: "2025-04-28T18:02:21Z",
+    content:
       "Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employmentExploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment",
+    description: "short desc",
     _id: "t4ech-ai",
   },
   {
     title: "AI and the Future of Work",
-    description:
+    author: "doctor name",
+    image: "some_image",
+    publishedAt: "2025-04-28T18:02:21Z",
+    content:
       "Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employmentExploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment",
+    description: "short desc",
     _id: "t5ech-ai",
   },
 ];
 
-const TrendingArticlesCard = ({ article, index }) => {
+const RecentArticlesCard = ({ article }) => {
   return (
     <Box>
       <Box
@@ -88,17 +108,11 @@ const TrendingArticlesCard = ({ article, index }) => {
   );
 };
 
-export const TrendingArticles = () => {
+export const RecentArticles = () => {
   return (
     <Box flex={1} mt="20px">
-      {articlePreviews.map((article, index) => {
-        return (
-          <TrendingArticlesCard
-            key={article._id}
-            article={article}
-            index={index}
-          />
-        );
+      {articlePreviews.map((article) => {
+        return <RecentArticlesCard key={article._id} article={article} />;
       })}
     </Box>
   );

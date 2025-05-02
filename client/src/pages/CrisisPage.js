@@ -43,7 +43,7 @@ export const CrisisPage = () => {
           <Typography variant="h5" fontWeight="bold">
             Our professional Counsellors are available 24/7
           </Typography>
-          <Typography variant="h5">9876543210</Typography>
+          <Typography variant="h5">+91 98765-43210</Typography>
         </Box>
         <Box
           sx={{

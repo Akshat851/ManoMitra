@@ -4,7 +4,7 @@ import React from "react";
 import phone from "../images/phone.jpg";
 import online_support from "../images/online_support.jpg";
 import { Link } from "react-router-dom";
-import { TrendingArticles } from "../components/TrendingArticles";
+import { RecentArticles } from "../components/RecentArticles";
 
 // need to fetch it from backend
 const keywordData = [
@@ -108,9 +108,9 @@ export const HomePage = () => {
             fontSize: "1.2rem",
           }}
         >
-          Trending Articles
+          Recent Articles
         </Typography>
-        <TrendingArticles />
+        <RecentArticles />
         <Button
           sx={{ alignSelf: "end", mt: "10px" }}
           color="primary"
