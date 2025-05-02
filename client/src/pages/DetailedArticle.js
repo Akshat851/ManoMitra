@@ -5,9 +5,9 @@ import background_image from "../images/background.jpg";
 
 const article = {
   title: "AI and the Future of Work",
-  author: "doctor name",
+  author: "Akshat Mahajan",
   image: "some_image",
-  publishedAt: "2025-04-28T18:02:21Z",
+  publishedAt: "2025-05-28T18:02:21Z",
   content:
     "Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employmentExploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment",
   description:
@@ -18,6 +18,15 @@ const article = {
 export const DetailedArticle = () => {
   // fetch article from db using this articleid
   const { articleId } = useParams();
+
+  const date = new Date(article.publishedAt);
+  const formattedDate = new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(date);
+
   return (
     <Box
       p="20px"
@@ -32,18 +41,30 @@ export const DetailedArticle = () => {
         fontWeight="bold"
         variant="h4"
         color="primary.main"
-        textAlign="justify"
+        alignSelf="center"
       >
         {article.title}
       </Typography>
       <Typography
-        py="20px"
+        pt="20px"
         fontWeight="bold"
         fontStyle="italic"
-        textAlign="justify"
+        alignSelf="center"
       >
-        ~{article.description}
+        {article.description}
       </Typography>
+      <Box
+        py="20px"
+        display="flex"
+        flexDirection="row"
+        alignSelf="center"
+        flexWrap="wrap"
+        color="text.secondary"
+        gap={4}
+      >
+        <Typography fontStyle="italic">by {article.author}</Typography>
+        <Typography fontStyle="italic">{formattedDate}</Typography>
+      </Box>
       <Box
         sx={{
           aspectRatio: "16 / 5",
