@@ -13,21 +13,13 @@ function App() {
   return (
     <BrowserRouter>
       <Box
-        sx={{
-          minHeight: "100vh",
-          bgcolor: "custom.bglayer",
-          display: "flex",
-          flexDirection: "column",
-        }}
+        minHeight="100vh"
+        bgcolor="custom.bglayer"
+        display="flex"
+        flexDirection="column"
       >
         <NavigationBar />
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            flex: 1,
-          }}
-        >
+        <Box display="flex" flexDirection="column" flex={1}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/crisis" element={<CrisisPage />} />

@@ -58,29 +58,19 @@ export const NavigationBar = () => {
           backgroundColor: "custom.navbar",
         }}
       >
-        <Toolbar
-          sx={{
-            fontSize: "large",
-          }}
-        >
-          <Box
-            display={{ xs: "none", md: "flex" }}
-            sx={{
-              flex: 1,
-            }}
-          >
+        <Toolbar>
+          <Box display={{ xs: "none", md: "flex" }} flex={1}>
             {navItems.map((item) => (
               <Box
                 key={item.text}
+                p="10px"
+                display="flex"
+                flexDirection="row"
+                gap={1}
+                borderRadius="50px"
+                color="inherit"
                 sx={{
-                  p: "10px",
-                  display: "flex",
-                  flexDirection: "row",
-                  gap: 1,
-                  borderRadius: "50px",
-                  cursor: "pointer",
                   textDecoration: "none",
-                  color: "inherit",
                   "&:hover": {
                     background: theme.palette.custom.darkHover,
                   },
@@ -88,14 +78,14 @@ export const NavigationBar = () => {
                 component={Link}
                 to={item.to}
               >
-                {item.text === "Home" && <HomeIcon sx={{ display: "flex" }} />}
+                {item.text === "Home" && <HomeIcon />}
                 <Typography>{item.text}</Typography>
               </Box>
             ))}
           </Box>
-          <Box display={{ sm: "flex", md: "none" }} sx={{ flex: 1 }}>
+          <Box display={{ sm: "flex", md: "none" }} flex={1}>
             <IconButton
-              sx={{ color: "inherit" }}
+              color="inherit"
               onClick={() => {
                 setShowSidebar(!showSidebar);
               }}
@@ -104,12 +94,14 @@ export const NavigationBar = () => {
             </IconButton>
           </Box>
           <Typography
+            p="10px"
+            borderRadius="50px"
+            component={Link}
+            to={"/"}
+            color="inherit"
             sx={{
-              alignItems: "center",
-              p: "10px",
+              textDecoration: "none",
               background: theme.palette.custom.darkHover,
-              borderRadius: "50px",
-              cursor: "pointer",
             }}
           >
             Login
