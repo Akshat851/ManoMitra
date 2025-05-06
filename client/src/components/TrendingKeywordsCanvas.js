@@ -1,16 +1,6 @@
-import { Box, Typography } from "@mui/material";
-import React from "react";
-
-// need to fetch it from backend
-const keywordData = [
-  { word: "React", id: 30 },
-  { word: "JavaScript", id: 50 },
-  { word: "CSS", id: 20 },
-  { word: "HTML", id: 16 },
-  { word: "HTML", id: 17 },
-  { word: "JavaScript", id: 51 },
-  { word: "HTML", id: 18 },
-];
+import { Box, Typography, CircularProgress } from "@mui/material";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const RenderKeywords = ({ keywordObj }) => {
   const opacity = Math.random() * 0.5 + 0.5;
@@ -34,6 +24,22 @@ const RenderKeywords = ({ keywordObj }) => {
 };
 
 export const TrendingKeywordsCanvas = () => {
+  const [keywordData, setKeywordData] = useState([]);
+  const [showSpinner, setShowSpinner] = useState(true);
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_PREFIX}/trending-keywords`)
+      .then((res) => {
+        if (res.status === 200) {
+          setKeywordData(res.data);
+          setShowSpinner(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setShowSpinner(false);
+      });
+  }, []);
   return (
     <Box display="flex" flexDirection="column" height="100%">
       <Typography color="primary.main" fontWeight="medium" fontSize="1.2rem">
@@ -46,9 +52,17 @@ export const TrendingKeywordsCanvas = () => {
         display="flex"
         flexWrap="wrap"
       >
-        {keywordData.map((keywordObj) => {
-          return <RenderKeywords key={keywordObj.id} keywordObj={keywordObj} />;
-        })}
+        {showSpinner ? (
+          <CircularProgress />
+        ) : keywordData.length === 0 ? (
+          <Typography>No Keywords available</Typography>
+        ) : (
+          keywordData.map((keywordObj) => {
+            return (
+              <RenderKeywords key={keywordObj.id} keywordObj={keywordObj} />
+            );
+          })
+        )}
       </Box>
     </Box>
   );

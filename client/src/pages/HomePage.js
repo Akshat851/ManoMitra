@@ -20,6 +20,7 @@ export const HomePage = () => {
         p={2}
         borderRadius="8px"
         boxShadow={3}
+        display="flex"
       >
         <RecentArticlesCanvas />
       </Box>
@@ -30,6 +31,7 @@ export const HomePage = () => {
           p={2}
           borderRadius="8px"
           boxShadow={3}
+          display="flex"
         >
           <CrisisCanvas />
         </Box>

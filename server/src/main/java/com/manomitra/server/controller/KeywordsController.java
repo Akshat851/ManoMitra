@@ -1,21 +1,23 @@
 package com.manomitra.server.controller;
 
-import com.manomitra.server.model.TrendingKeywordsEntity;
-import com.manomitra.server.service.TrendingKeywordsServiceImpl;
+import com.manomitra.server.model.KeywordsEntity;
+import com.manomitra.server.service.KeywordsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-public class TrendingKeywordsController {
+public class KeywordsController {
 
     @Autowired
-    TrendingKeywordsServiceImpl trendingKeywordsService;
+    KeywordsServiceImpl trendingKeywordsService;
 
+    @CrossOrigin
     @GetMapping("/trending-keywords")
-    public List<TrendingKeywordsEntity> trendingKeywords(){
+    public List<KeywordsEntity> trendingKeywords(){
         return trendingKeywordsService.trendingKeywords();
     }
 }

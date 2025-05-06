@@ -7,14 +7,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "keywords")
-public class TrendingKeywordsEntity {
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "articles")
+public class ArticlesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String word;
+    private String title;
+    private String author;
+    private String image;
+    private String publishedAt;
+    private String content;
+    private String description;
 }
