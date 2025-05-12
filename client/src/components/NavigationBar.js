@@ -35,7 +35,7 @@ export const NavigationBar = () => {
     },
     {
       text: "Events",
-      to: "/",
+      to: "/events",
     },
     {
       text: "Contact Us",
@@ -43,11 +43,11 @@ export const NavigationBar = () => {
     },
     {
       text: "Chat",
-      to: "/",
+      to: "/chat",
     },
     {
       text: "Counsellors",
-      to: "/",
+      to: "/counsellors",
     },
   ];
   return (

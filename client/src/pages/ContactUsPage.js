@@ -107,7 +107,7 @@ export const ContactUsPage = () => {
                 <br />
                 PHONE
               </Typography>
-              <Typography align={alignValue}>+91 98765-43210</Typography>
+              <Typography align={alignValue}>1800-120-820050</Typography>
             </Box>
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }}>

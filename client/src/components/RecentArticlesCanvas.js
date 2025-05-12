@@ -60,6 +60,7 @@ export const RecentArticlesCanvas = () => {
   const [articlePreviews, setArticlePreviews] = useState([]);
   const [showSpinner, setShowSpinner] = useState(true);
   useEffect(() => {
+    // modify to fetch upto 7/8 articles only
     axios
       .get(`${process.env.REACT_APP_SERVER_PREFIX}/articles`)
       .then((res) => {

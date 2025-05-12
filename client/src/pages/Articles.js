@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import {
@@ -13,56 +13,90 @@ import {
   CardMedia,
   Grid,
   Box,
+  CircularProgress,
 } from "@mui/material";
 import background_image from "../images/background.jpg";
+import axios from "axios";
 
-const articlePreviews = [
-  {
-    title: "AI and the Future of Work",
-    author: "doctor name",
-    image: background_image,
-    publishedAt: "2025-04-28T18:02:21Z",
-    content:
-      "Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employmentExploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment",
-    description: "short desc",
-    _id: "t1ech-ai",
-  },
-  {
-    title: "AI and the Future of Work",
-    author: "doctor name",
-    image: background_image,
-    publishedAt: "2025-04-28T18:02:21Z",
-    content:
-      "Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employmentExploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment Exploring how AI will change employment",
-    description: "short desc",
-    _id: "t2ech-ai",
-  },
-];
+// debounce search
+// pagination and lazy loading
+// remove truncate text function implementation
+// store and fetch real image from backend
+// need to add some margin/padding in card for mobile screen
+// image to take full width incase of mobile screens
 
-const truncateText = (text, maxLength = 100) => {
-  if (!text) return "";
-  return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+const truncateText = (text, maxLength = 100) =>
+  text?.length > maxLength ? `${text.slice(0, maxLength)}...` : text || "";
+
+const ArticlePreview = ({ article }) => {
+  const { title, author, description, publishedAt } = article;
+
+  const formattedDate = useMemo(() => {
+    return new Intl.DateTimeFormat("en-GB", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+      timeZone: "UTC",
+    }).format(new Date(publishedAt));
+  }, [publishedAt]);
+
+  return (
+    <Card sx={{ display: "flex", maxWidth: 800, my: 2, flexWrap: "wrap" }}>
+      <CardMedia
+        component="img"
+        sx={{ width: 250, objectFit: "cover" }}
+        image={background_image}
+        alt={title}
+      />
+      <Box display="flex" flexDirection="column" flex={1}>
+        <CardContent>
+          <Typography
+            component="h2"
+            variant="h6"
+            gutterBottom
+            color="primary.main"
+          >
+            {title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {truncateText(description, 120)}
+          </Typography>
+          <Grid container spacing={1} sx={{ mt: 1 }}>
+            <Grid>
+              <Typography variant="caption" color="text.secondary">
+                {author}
+              </Typography>
+            </Grid>
+            <Grid>
+              <Typography variant="caption" color="text.secondary">
+                • {formattedDate}
+              </Typography>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Box>
+    </Card>
+  );
 };
 
 export const Articles = () => {
-  const { image, title, description, author, publishedAt } = articlePreviews[0];
-  const date = new Date(publishedAt);
-  const formattedDate = new Intl.DateTimeFormat("en-GB", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  }).format(date);
-
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-  };
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_PREFIX}/articles`)
+      .then((res) => {
+        setArticles(res.data || []);
+      })
+      .catch((err) => {
+        console.error("Error fetching articles:", err);
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
-  const getSearchResult = () => {
-    // call api and fetch data only if searchTerm.tirm.length is greater than 0
-  };
+  const handleSearchChange = (e) => setSearchTerm(e.target.value);
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
@@ -70,55 +104,31 @@ export const Articles = () => {
     }
   };
 
+  const getSearchResult = () => {
+    if (searchTerm.trim().length === 0) return;
+    // TODO: implement search logic (e.g., fetch or filter locally)
+  };
+
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        flex: 1,
-      }}
-    >
-      <Box
-        sx={{
-          p: "20px",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
+    <Box display="flex" flexDirection="column" flex={1}>
+      <Box p={2.5} display="flex" justifyContent="center">
         <FormControl
           sx={{
-            maxWidth: "800px",
-            "& .MuiOutlinedInput-root": {
-              "&:hover fieldset": {
-                borderColor: "primary.main",
-              },
+            maxWidth: 800,
+            "& .MuiOutlinedInput-root:hover fieldset": {
+              borderColor: "primary.main",
             },
           }}
-          variant="outlined"
           fullWidth
+          variant="outlined"
         >
           <InputLabel>Search For Articles</InputLabel>
           <OutlinedInput
             value={searchTerm}
-            onChange={handleSearch}
-            label="Search For Articles"
+            onChange={handleSearchChange}
             onKeyDown={handleKeyPress}
-            sx={{
-              input: { color: "primary.main" },
-            }}
-            endAdornment={
-              <InputAdornment position="end">
-                {searchTerm.length !== 0 && (
-                  <IconButton
-                    onClick={() => {
-                      setSearchTerm("");
-                    }}
-                  >
-                    <CloseIcon />
-                  </IconButton>
-                )}
-              </InputAdornment>
-            }
+            label="Search For Articles"
+            sx={{ input: { color: "primary.main" } }}
             startAdornment={
               <InputAdornment position="start">
                 <IconButton onClick={getSearchResult}>
@@ -126,47 +136,51 @@ export const Articles = () => {
                 </IconButton>
               </InputAdornment>
             }
+            endAdornment={
+              searchTerm && (
+                <InputAdornment position="end">
+                  <IconButton onClick={() => setSearchTerm("")}>
+                    <CloseIcon />
+                  </IconButton>
+                </InputAdornment>
+              )
+            }
           />
         </FormControl>
       </Box>
-      <Box alignSelf="center">
-        <Card
-          sx={{ display: "flex", maxWidth: 800, margin: 2, flexWrap: "wrap" }}
-        >
-          <CardMedia
-            component="img"
-            sx={{ width: 250, objectFit: "cover" }}
-            image={image}
-            alt={title}
-          />
-          <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
-            <CardContent>
-              <Typography
-                component="h2"
-                variant="h6"
-                gutterBottom
-                color="primary.main"
-              >
-                {title}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {truncateText(description, 120)}
-              </Typography>
-              <Grid container spacing={1} sx={{ marginTop: 1 }}>
-                <Grid>
-                  <Typography variant="caption" color="text.secondary">
-                    {author}
-                  </Typography>
-                </Grid>
-                <Grid>
-                  <Typography variant="caption" color="text.secondary">
-                    • {formattedDate}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </CardContent>
+
+      <Box
+        alignSelf="center"
+        flex={1}
+        maxWidth={800}
+        width="100%"
+        display="flex"
+      >
+        {loading ? (
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flex={1}
+          >
+            <CircularProgress />
           </Box>
-        </Card>
+        ) : articles.length === 0 ? (
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flex={1}
+          >
+            <Typography>No Articles available</Typography>
+          </Box>
+        ) : (
+          <Box display="flex" flexDirection="column" flex={1}>
+            {articles.map((article) => (
+              <ArticlePreview key={article.id} article={article} />
+            ))}
+          </Box>
+        )}
       </Box>
     </Box>
   );
