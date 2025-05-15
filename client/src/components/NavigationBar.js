@@ -97,7 +97,7 @@ export const NavigationBar = () => {
             p="10px"
             borderRadius="50px"
             component={Link}
-            to={"/"}
+            to={"/login"}
             color="inherit"
             sx={{
               textDecoration: "none",
