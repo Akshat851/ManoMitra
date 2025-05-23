@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ArticlesService {
     List<ArticlesEntity> articles();
+
+    ArticlesEntity article(Long id);
 }

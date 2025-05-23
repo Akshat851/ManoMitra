@@ -16,4 +16,9 @@ public class ArticlesServiceImpl implements ArticlesService{
     public List<ArticlesEntity> articles() {
         return articlesRepository.findAll();
     }
+
+    @Override
+    public ArticlesEntity article(Long id) {
+        return articlesRepository.findById(id).orElse(new ArticlesEntity());
+    }
 }
