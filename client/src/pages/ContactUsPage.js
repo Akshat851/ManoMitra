@@ -63,14 +63,7 @@ export const ContactUsPage = () => {
     }));
   };
   return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flex: 1,
-      }}
-    >
+    <Box display="flex" justifyContent="center" pt="20px">
       <Box
         maxWidth="md"
         sx={{

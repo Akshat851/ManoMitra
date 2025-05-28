@@ -9,6 +9,7 @@ import { Box } from "@mui/material";
 import { DetailedArticle } from "./pages/DetailedArticle";
 import { Articles } from "./pages/Articles";
 import { LoginSignup } from "./pages/LoginSignup";
+import { AboutUs } from "./pages/AboutUs";
 function App() {
   return (
     <BrowserRouter>
@@ -28,6 +29,7 @@ function App() {
             <Route path="/articles" element={<Articles />} />
             <Route path="/login" element={<LoginSignup />} />
             <Route path="/articles/:articleId" element={<DetailedArticle />} />
+            <Route path="/aboutus" element={<AboutUs />} />
           </Routes>
         </Box>
         <Footer />

@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import background_image from "../images/background.jpg";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 // debounce search
 // pagination and lazy loading
@@ -24,12 +25,13 @@ import axios from "axios";
 // store and fetch real image from backend
 // need to add some margin/padding in card for mobile screen
 // image to take full width incase of mobile screens
+// if user is doctor give option for adding new article and edit his existing ones
 
 const truncateText = (text, maxLength = 100) =>
   text?.length > maxLength ? `${text.slice(0, maxLength)}...` : text || "";
 
 const ArticlePreview = ({ article }) => {
-  const { title, author, description, publishedAt } = article;
+  const { id, title, author, description, publishedAt } = article;
 
   const formattedDate = useMemo(() => {
     return new Intl.DateTimeFormat("en-GB", {
@@ -41,7 +43,11 @@ const ArticlePreview = ({ article }) => {
   }, [publishedAt]);
 
   return (
-    <Card sx={{ display: "flex", maxWidth: 800, my: 2, flexWrap: "wrap" }}>
+    <Card
+      sx={{ display: "flex", maxWidth: "md", my: 2, flexWrap: "wrap" }}
+      component={Link}
+      to={`/articles/${id}`}
+    >
       <CardMedia
         component="img"
         sx={{ width: 250, objectFit: "cover" }}
@@ -114,7 +120,7 @@ export const Articles = () => {
       <Box p={2.5} display="flex" justifyContent="center">
         <FormControl
           sx={{
-            maxWidth: 800,
+            maxWidth: "md",
             "& .MuiOutlinedInput-root:hover fieldset": {
               borderColor: "primary.main",
             },
@@ -152,7 +158,7 @@ export const Articles = () => {
       <Box
         alignSelf="center"
         flex={1}
-        maxWidth={800}
+        maxWidth="md"
         width="100%"
         display="flex"
       >
