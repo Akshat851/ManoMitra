@@ -43,7 +43,7 @@ export const TrendingKeywordsCanvas = () => {
   return (
     <Box display="flex" flexDirection="column" height="100%">
       <Typography color="primary.main" fontWeight="medium" fontSize="1.2rem">
-        Trending Keywords
+        Trending Searches
       </Typography>
       <Box
         flex={1}

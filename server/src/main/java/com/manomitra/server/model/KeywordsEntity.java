@@ -1,10 +1,7 @@
 package com.manomitra.server.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @NoArgsConstructor
@@ -12,9 +9,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "keywords")
+@ToString
 public class KeywordsEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
     private String word;
 }
