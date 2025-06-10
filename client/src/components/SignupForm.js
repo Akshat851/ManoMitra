@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   CircularProgress,
@@ -7,6 +8,7 @@ import {
   InputAdornment,
   InputLabel,
   OutlinedInput,
+  Snackbar,
   Switch,
   TextField,
   Typography,
@@ -14,6 +16,7 @@ import {
 import { useState } from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import axios from "axios";
 
 const textFieldSx = {
   mb: "20px",
@@ -25,6 +28,8 @@ const textFieldSx = {
 
 const SignupForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [sendMessageSucess, setSendMessageSucess] = useState(false);
+  const [sendMessageError, setSendMessageError] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -47,7 +52,33 @@ const SignupForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setDisabled(true);
-    // send sanitized data to backend
+    const cleanedData = {
+      ...formData,
+      yoe: formData.isDoctor ? formData.yoe : 0,
+      degree: formData.isDoctor ? formData.degree : "",
+    };
+    axios
+      .post(`${process.env.REACT_APP_SERVER_PREFIX}/register`, cleanedData)
+      .then((res) => {
+        if (res.status === 200) {
+          setFormData({
+            name: "",
+            email: "",
+            isDoctor: false,
+            yoe: 0,
+            degree: "",
+            password: "",
+          });
+          setSendMessageSucess(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setSendMessageError(true);
+      })
+      .finally(() => {
+        setDisabled(false);
+      });
   };
 
   return (
@@ -160,6 +191,42 @@ const SignupForm = () => {
           )}
         </Button>
       </Box>
+      <Snackbar
+        open={sendMessageSucess}
+        autoHideDuration={3500}
+        onClose={() => {
+          setSendMessageSucess(false);
+        }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={() => {
+            setSendMessageSucess(false);
+          }}
+          severity="success"
+          variant="filled"
+        >
+          Registration Successful
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={sendMessageError}
+        autoHideDuration={3500}
+        onClose={() => {
+          setSendMessageError(false);
+        }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={() => {
+            setSendMessageError(false);
+          }}
+          severity="error"
+          variant="filled"
+        >
+          Registration Failed
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

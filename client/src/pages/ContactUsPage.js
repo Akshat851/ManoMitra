@@ -50,7 +50,7 @@ export const ContactUsPage = () => {
         (error) => {
           setSendMessageError(true);
           setStateDisabled(false);
-          console.log(error.text);
+          console.log(error);
         }
       );
   };

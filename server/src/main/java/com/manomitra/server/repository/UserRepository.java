@@ -1,0 +1,10 @@
+package com.manomitra.server.repository;
+
+import com.manomitra.server.model.ArticlesEntity;
+import com.manomitra.server.model.UserEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserRepository extends JpaRepository<UserEntity,Long> {
+}
