@@ -1,23 +1,24 @@
 package com.manomitra.server.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Table(name = "users")
 public class UserEntity {
     @Id
     @GeneratedValue
     private long id;
     private String name;
+
+    @Column(unique = true)
     private String email;
     private boolean isDoctor;
     private int yoe;

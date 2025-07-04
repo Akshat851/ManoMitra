@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Alert,
   Box,
   Button,
   CircularProgress,
@@ -8,11 +9,13 @@ import {
   InputAdornment,
   InputLabel,
   OutlinedInput,
+  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import axios from "axios";
 
 export const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +25,9 @@ export const LoginForm = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [disabled, setDisabled] = useState(false);
+
+  const [sendMessageSucess, setSendMessageSucess] = useState(false);
+  const [sendMessageError, setSendMessageError] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -34,7 +40,26 @@ export const LoginForm = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setDisabled(true);
-    // validate the user from backend
+    axios
+      .post(`${process.env.REACT_APP_SERVER_PREFIX}/login`, formData)
+      .then((res) => {
+        if (res.status === 200 && res.data === "Success") {
+          setFormData({
+            email: "",
+            password: "",
+          });
+          setSendMessageSucess(true);
+        } else {
+          setSendMessageError(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setSendMessageError(true);
+      })
+      .finally(() => {
+        setDisabled(false);
+      });
   };
 
   const textFieldSx = {
@@ -114,6 +139,42 @@ export const LoginForm = () => {
           )}
         </Button>
       </Box>
+      <Snackbar
+        open={sendMessageSucess}
+        autoHideDuration={3500}
+        onClose={() => {
+          setSendMessageSucess(false);
+        }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={() => {
+            setSendMessageSucess(false);
+          }}
+          severity="success"
+          variant="filled"
+        >
+          Login Successful
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={sendMessageError}
+        autoHideDuration={3500}
+        onClose={() => {
+          setSendMessageError(false);
+        }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={() => {
+            setSendMessageError(false);
+          }}
+          severity="error"
+          variant="filled"
+        >
+          Login Failed
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

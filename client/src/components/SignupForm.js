@@ -70,6 +70,8 @@ const SignupForm = () => {
             password: "",
           });
           setSendMessageSucess(true);
+        } else {
+          setSendMessageError(true);
         }
       })
       .catch((err) => {

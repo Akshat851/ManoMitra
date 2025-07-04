@@ -4,12 +4,13 @@ import lombok.*;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@ConfigurationProperties(prefix = "news-service-config")
+@ConfigurationProperties(prefix = "custom-config")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Component
-public class NewsServiceConfig {
-    private String url;
+public class CustomConfig {
+    private String newsApiUrl;
+    private String jwtSecretKey;
 }
