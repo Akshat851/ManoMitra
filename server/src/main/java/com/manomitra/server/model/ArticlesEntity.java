@@ -9,15 +9,17 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "articles")
-@ToString
 public class ArticlesEntity {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(columnDefinition = "TEXT")
     private String title;
     private String author;
-    private String image;
+    private byte[] image;
     private String publishedAt;
+    @Column(columnDefinition = "TEXT")
     private String content;
+    @Column(columnDefinition = "TEXT")
     private String description;
 }

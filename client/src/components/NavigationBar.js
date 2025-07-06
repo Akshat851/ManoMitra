@@ -42,10 +42,6 @@ export const NavigationBar = () => {
       to: "/chat",
     },
     {
-      text: "Counsellors",
-      to: "/counsellors",
-    },
-    {
       text: "About Us",
       to: "/aboutus",
     },
@@ -53,7 +49,7 @@ export const NavigationBar = () => {
   return (
     <Box>
       <AppBar
-        position="static"
+        position="fixed"
         sx={{
           backgroundColor: "custom.navbar",
         }}

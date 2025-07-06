@@ -102,9 +102,12 @@ export const RecentArticlesCanvas = () => {
           </Box>
         ) : (
           <Box display="flex" flexDirection="column" flex={1}>
-            {articlePreviews.map((article) => (
-              <RecentArticlesCard key={article.id} article={article} />
-            ))}
+            {articlePreviews.map(
+              (article, index) =>
+                index < 5 && (
+                  <RecentArticlesCard key={article.id} article={article} />
+                )
+            )}
           </Box>
         )}
       </Box>

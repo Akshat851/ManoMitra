@@ -1,5 +1,6 @@
 package com.manomitra.server.config;
 
+import com.manomitra.server.model.UserEntity;
 import com.manomitra.server.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -26,10 +27,10 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
-            String username = jwtService.extractUsernameAndValidateToken(token);
+            UserEntity user = jwtService.extractUsernameAndValidateToken(token);
 
-            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, null, List.of());
+            if (user.getEmail() != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(user.getEmail(), null, List.of());
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
