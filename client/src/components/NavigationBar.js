@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -11,15 +11,21 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+  Button,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import axios from "axios";
 
 export const NavigationBar = () => {
   const theme = useTheme();
   const [showSidebar, setShowSidebar] = useState(false);
+  const [username, setUsername] = useState("");
   const navItems = [
     {
       text: "Home",
@@ -46,6 +52,48 @@ export const NavigationBar = () => {
       to: "/aboutus",
     },
   ];
+  const [openUserProfileForm, setOpenUserProfileForm] = useState(false);
+
+  useEffect(() => {
+    const authorization = localStorage.getItem("Authorization");
+    if (authorization && authorization.trim()) {
+      axios
+        .get(`${process.env.REACT_APP_SERVER_PREFIX}/auth/validate-token`, {
+          headers: {
+            Authorization: `Bearer ${authorization}`,
+          },
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            let tempUsername = res.data.name;
+            if (tempUsername && tempUsername.trim()) {
+              const myArray = tempUsername.split(" ");
+              if (myArray.length >= 2) {
+                setUsername(myArray[0].charAt(0) + myArray[1].charAt(0));
+              } else {
+                setUsername(myArray[0].charAt(0));
+              }
+            }
+            localStorage.setItem("email", res.data.email);
+          } else {
+            localStorage.clear();
+          }
+        })
+        .catch((err) => {
+          console.error("Error validating user", err);
+          localStorage.clear();
+        });
+    }
+  }, [username]);
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    setUsername("");
+    setOpenUserProfileForm(false);
+    window.location.reload();
+  };
+
   return (
     <Box>
       <AppBar
@@ -89,19 +137,39 @@ export const NavigationBar = () => {
               <MenuIcon />
             </IconButton>
           </Box>
-          <Typography
-            p="10px"
-            borderRadius="50px"
-            component={Link}
-            to={"/login"}
-            color="inherit"
-            sx={{
-              textDecoration: "none",
-              background: theme.palette.custom.darkHover,
-            }}
-          >
-            Login
-          </Typography>
+          {username && username.trim() !== "" ? (
+            <Typography
+              p="10px"
+              borderRadius="50px"
+              color="inherit"
+              onClick={() => {
+                setOpenUserProfileForm(true);
+              }}
+              sx={{
+                textDecoration: "none",
+                background: theme.palette.custom.darkHover,
+                "&:hover": {
+                  cursor: "pointer",
+                },
+              }}
+            >
+              {username.toUpperCase()}
+            </Typography>
+          ) : (
+            <Typography
+              p="10px"
+              borderRadius="50px"
+              component={Link}
+              to={"/login"}
+              color="inherit"
+              sx={{
+                textDecoration: "none",
+                background: theme.palette.custom.darkHover,
+              }}
+            >
+              Login
+            </Typography>
+          )}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -141,6 +209,21 @@ export const NavigationBar = () => {
           </Box>
         </Box>
       </Drawer>
+      {openUserProfileForm && (
+        <Dialog
+          open={openUserProfileForm}
+          onClose={() => setOpenUserProfileForm(false)}
+          fullWidth
+          maxWidth="xs"
+        >
+          <DialogTitle sx={{ m: 0, p: 2, color: "primary.main" }}>
+            {username}
+          </DialogTitle>
+          <DialogActions>
+            <Button onClick={handleLogout}>Logout?</Button>
+          </DialogActions>
+        </Dialog>
+      )}
     </Box>
   );
 };

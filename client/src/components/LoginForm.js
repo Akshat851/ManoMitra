@@ -16,12 +16,14 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const LoginForm = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
   const [disabled, setDisabled] = useState(false);
@@ -41,14 +43,18 @@ export const LoginForm = () => {
     e.preventDefault();
     setDisabled(true);
     axios
-      .post(`${process.env.REACT_APP_SERVER_PREFIX}/login`, formData)
+      .post(`${process.env.REACT_APP_SERVER_PREFIX}/auth/login`, formData)
       .then((res) => {
-        if (res.status === 200 && res.data === "Success") {
+        if (res.status === 200) {
+          localStorage.setItem("Authorization", res.data.access_token);
+          localStorage.setItem("email", formData.email);
           setFormData({
             email: "",
             password: "",
           });
           setSendMessageSucess(true);
+          navigate("/");
+          window.location.reload();
         } else {
           setSendMessageError(true);
         }

@@ -13,12 +13,14 @@ import {
   IconButton,
 } from "@mui/material";
 import { Send } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 export const ChatRoom = () => {
   const [stompClient, setStompClient] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMsg, setNewMsg] = useState("");
   const email = localStorage.getItem("email");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("Authorization");
@@ -30,6 +32,7 @@ export const ChatRoom = () => {
         setMessages(res.data);
       })
       .catch((err) => {
+        navigate("/login");
         console.error("Error fetching old chats:", err);
       });
 
@@ -45,7 +48,7 @@ export const ChatRoom = () => {
     });
     setStompClient(client);
     return () => client.disconnect();
-  }, []);
+  }, [navigate]);
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {

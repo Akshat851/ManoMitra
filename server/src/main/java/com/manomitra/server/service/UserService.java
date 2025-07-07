@@ -5,7 +5,9 @@ import org.springframework.http.ResponseEntity;
 
 public interface UserService {
 
-    void registerUser(UserEntity user);
+    ResponseEntity<?> registerUser(UserEntity user);
 
     ResponseEntity<?> loginUser(UserEntity user);
+
+    UserEntity validateUser(String authHeader);
 }

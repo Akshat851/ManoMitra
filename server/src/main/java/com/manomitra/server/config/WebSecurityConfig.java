@@ -33,7 +33,7 @@ public class WebSecurityConfig {
         httpSecurity
                 .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(req->req.requestMatchers("/register", "/login","/articles/*","/articles","/trending-keywords","/news","/ws/**").permitAll().anyRequest().authenticated())
+                .authorizeHttpRequests(req->req.requestMatchers("/auth/**","/articles/*","/articles","/trending-keywords","/news","/ws/**").permitAll().anyRequest().authenticated())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();

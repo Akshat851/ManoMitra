@@ -1,5 +1,6 @@
 package com.manomitra.server.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Table(name = "users")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class UserEntity {
     @Id
     @GeneratedValue

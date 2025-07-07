@@ -29,13 +29,15 @@ public class UserServiceImpl implements UserService {
     private JwtService jwtService;
 
     @Override
-    public void registerUser(UserEntity user) {
+    public ResponseEntity<?> registerUser(UserEntity user) {
         UserEntity userFromDb = userRepository.findByEmail(user.getEmail()).orElse(null);
         if (!Objects.isNull(userFromDb)){
             throw new RuntimeException("User Already Exists");
         }
         user.setPassword(encoder.encode(user.getPassword()));
         userRepository.save(user);
+        String token = jwtService.getToken(user);
+        return ResponseEntity.ok(Collections.singletonMap("access_token", token));
     }
 
     @Override
@@ -46,5 +48,14 @@ public class UserServiceImpl implements UserService {
             return ResponseEntity.ok(Collections.singletonMap("access_token", token));
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+    }
+
+    @Override
+    public UserEntity validateUser(String authHeader) {
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            String token = authHeader.substring(7);
+            return jwtService.extractUsernameAndValidateToken(token);
+        }
+        return null;
     }
 }

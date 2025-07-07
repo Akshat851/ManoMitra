@@ -17,6 +17,7 @@ import { useState } from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const textFieldSx = {
   mb: "20px",
@@ -31,7 +32,7 @@ const SignupForm = () => {
   const [sendMessageSucess, setSendMessageSucess] = useState(false);
   const [sendMessageError, setSendMessageError] = useState(false);
   const [disabled, setDisabled] = useState(false);
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -58,9 +59,11 @@ const SignupForm = () => {
       degree: formData.isDoctor ? formData.degree : "",
     };
     axios
-      .post(`${process.env.REACT_APP_SERVER_PREFIX}/register`, cleanedData)
+      .post(`${process.env.REACT_APP_SERVER_PREFIX}/auth/register`, cleanedData)
       .then((res) => {
         if (res.status === 200) {
+          localStorage.setItem("Authorization", res.data.access_token);
+          localStorage.setItem("email", formData.email);
           setFormData({
             name: "",
             email: "",
@@ -70,6 +73,8 @@ const SignupForm = () => {
             password: "",
           });
           setSendMessageSucess(true);
+          navigate("/");
+          window.location.reload();
         } else {
           setSendMessageError(true);
         }
